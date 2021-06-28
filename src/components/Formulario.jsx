@@ -1,6 +1,7 @@
 import React, {Fragment, useState} from 'react'
+import {v4 as uuid} from "uuid";
 
-const Formulario = () => {
+const Formulario = ({crearCita}) => {
     const [cita, setCita] = useState({
         mascota: '',
         propietario: '',
@@ -8,29 +9,44 @@ const Formulario = () => {
         hora: '',
         sintomas: '',
     })
+    // Extraccion de propietarios
+    const {mascota, propietario, fecha, hora, sintomas} = cita
+
+    // En caso de un error
     const [error, setError] = useState(false)
+
     // Funcion que se ejecuta cada vez que se escribe en un input 
     const acutalizarState = e =>{
         setCita({
             ...cita,
             [e.target.name]: e.target.value
         })
-    }
-    // Extraccion de propietarios
-    const {mascota, propietario, fecha, hora, sintomas} = cita
+    }   
+
     // Cuando el usuario preciona agregar citas
     const submitCita = e =>{
         e.preventDefault();
         // Validar
-        if(mascota.trim() === '' || propietario.trim() === '' || fecha.trim() === '' || hora.trim() === '' || sintomas.trim() === ''
-        ){
+        if(mascota.trim() === '' || propietario.trim() === '' || fecha.trim() === '' || hora.trim() === '' || sintomas.trim() === ''){
             setError(true)
             return 
         }
+        setError(false)
         // Asignar un id
+        cita.id = uuid()
+
         // Crear la cita
+        crearCita(cita)
         // Reinciar el form 
+        setCita({
+            mascota: '',
+            propietario: '',
+            fecha: '',
+            hora: '',
+            sintomas: '',
+        })
     }
+
     return (
         <Fragment>
             <h1>Crear Cita</h1>

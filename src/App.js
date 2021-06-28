@@ -1,10 +1,15 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState, useEffect} from 'react'
 import Formulario from './components/Formulario'
 import Cita from './components/Cita'
 
 const App = () => {
   // Arreglo de citas
   const [citas, anexarCitas] = useState([])
+
+  useEffect(() => {
+    
+  }, [])
+
   // Funcion que tome las citas actuales y tome la nueva
   const crearCita = cita =>{
     anexarCitas([...citas, cita])
@@ -18,6 +23,7 @@ const App = () => {
   const titulo = citas.length === 0 
     ? 'No existen citas'
     : 'Administra tus citas' 
+
 
   return (
     <Fragment>

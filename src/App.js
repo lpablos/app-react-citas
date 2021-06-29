@@ -3,7 +3,6 @@ import Formulario from './components/Formulario'
 import Cita from './components/Cita'
 
 const App = () => {
-  // citas en localStorage
   let citasIniciales = JSON.parse(localStorage.getItem('citas'))
   if(!citasIniciales){
     citasIniciales = []
@@ -15,12 +14,15 @@ const App = () => {
   // es un observador de una variable cuando lo uses o pases un parametro
   // es parecido a un document ready pero tambien observa
   useEffect(() => {
+     // citas en localStorage
+    
+
     if(citasIniciales){
       localStorage.setItem('citas', JSON.stringify(citas))
     }else{
       localStorage.setItem('citas',JSON.stringify([]))
     }
-  }, [citas, citasIniciales])  
+  }, [citas,citasIniciales])  
 
   // Funcion que tome las citas actuales y tome la nueva
   const crearCita = cita =>{

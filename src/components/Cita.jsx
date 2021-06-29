@@ -1,4 +1,5 @@
 import React from 'react'
+import Prototype from 'prop-types';
 
 const Cita = ({cita, eliminarCita}) => {
     return (
@@ -15,5 +16,8 @@ const Cita = ({cita, eliminarCita}) => {
         </div>
     )
 }
-
+Cita.prototype = {
+    cita: Prototype.object.isRequired,
+    eliminarCita: Prototype.func.isRequired
+}
 export default Cita

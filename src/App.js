@@ -3,12 +3,24 @@ import Formulario from './components/Formulario'
 import Cita from './components/Cita'
 
 const App = () => {
+  // citas en localStorage
+  let citasIniciales = JSON.parse(localStorage.getItem('citas'))
+  if(!citasIniciales){
+    citasIniciales = []
+  }
   // Arreglo de citas
-  const [citas, anexarCitas] = useState([])
+  const [citas, anexarCitas] = useState(citasIniciales)
 
+  //Realizar opraciones cuando el state cambia
+  // es un observador de una variable cuando lo uses o pases un parametro
+  // es parecido a un document ready pero tambien observa
   useEffect(() => {
-    
-  }, [])
+    if(citasIniciales){
+      localStorage.setItem('citas', JSON.stringify(citas))
+    }else{
+      localStorage.setItem('citas',JSON.stringify([]))
+    }
+  }, [citas, citasIniciales])  
 
   // Funcion que tome las citas actuales y tome la nueva
   const crearCita = cita =>{
